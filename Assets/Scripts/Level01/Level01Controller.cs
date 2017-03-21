@@ -5,6 +5,9 @@ using UnityEngine;
 public class Level01Controller : MonoBehaviour {
 
 	#region Fields
+
+  Timer timer;
+
   #endregion
 
 	#region Mono Behaviour
@@ -22,7 +25,9 @@ public class Level01Controller : MonoBehaviour {
   #region Event Behaviour
 
   void OnMouseButtonDownInput(MouseButtonDownInput mouseButtonDownInput) {
-    Debug.Log("MouseButtonDownInput on " + mouseButtonDownInput.Position); 
+    if(timer != null && !timer.isDone)
+      Timer.Pause(timer);
+    timer = Timer.Register(1f, () => Debug.Log("MouseButtonDownInput on " + mouseButtonDownInput.Position), isLooped: true);
   }
 
   #endregion
