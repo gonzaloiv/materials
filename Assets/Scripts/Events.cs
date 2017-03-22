@@ -15,3 +15,13 @@ public class MouseButtonDownInput : UnityEvent {
 }
 
 #endregion
+
+#region Game Mechanics Events
+
+public class PlayerHitEvent : UnityEvent {
+  public PlayerHitEvent() {
+   Debug.Log("PlayerHitEvent");
+  }
+}
+
+#endregion
