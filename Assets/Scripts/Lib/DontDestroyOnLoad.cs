@@ -6,10 +6,21 @@ public class DontDestroyOnLoad : MonoBehaviour {
 
   #region Mono Behaviour
 
-	void Awake () {
-		DontDestroyOnLoad(gameObject);
-	}
+  private static DontDestroyOnLoad instance;
 
   #endregion
-	
+
+  #region Mono Behaviour
+ 
+  void Awake() {
+    if (instance)
+      Destroy(gameObject);
+    else {
+      DontDestroyOnLoad(gameObject);
+      instance = this;
+    }
+  }
+
+  #endregion
+  
 }
