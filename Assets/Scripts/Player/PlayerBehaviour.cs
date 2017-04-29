@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Lean.Touch;
+using PlayerStates;
 using DG.Tweening;
 
-public class PlayerBehaviour : LeanSelectableBehaviour {
+public class PlayerBehaviour : StateMachine {
 
   #region Fields
 
+  private const float TRIGGER_TIME = 0.2f; 
   private PlayerController playerController;
-  private Vector2 initialPosition;
-
-  private bool selected;
-  private Tweener shaking;
+  private float timestamp;
 
   #endregion
 
@@ -20,34 +18,41 @@ public class PlayerBehaviour : LeanSelectableBehaviour {
 
   void Awake() {
     playerController = GetComponent<PlayerController>();
-    initialPosition = transform.position;
-    shaking = transform.DOShakeScale(1f, 0.1f, 5, 180, true).SetLoops(-1).Pause();
+    ChangeState<IdleState>();
+    timestamp = Time.time;
   }
 
-  void Update() {
-    if (shaking != null && !shaking.IsPlaying() && !selected)
-      shaking.Play();
+  void OnEnable() {
+    EventManager.StartListening<PlayerSelectionEvent>(OnPlayerSelectionEvent);
+  }
+
+  void OnDisable() {
+    EventManager.StopListening<PlayerSelectionEvent>(OnPlayerSelectionEvent);
+  }
+
+  void OnTriggerEnter2D(Collider2D collider2D) {
+    if (collider2D.gameObject.layer == (int) Layer.Goal && CurrentState.GetType() != typeof(GoalState) && timestamp + TRIGGER_TIME < Time.time) {
+      GoalState.SetGoalPosition(collider2D.transform.position);
+      ChangeState<GoalState>();
+    }
   }
 
   void OnBecameInvisible() {
-    transform.position = initialPosition;
-  }
-
-  void OnCollisionEnter2D(Collision2D collision2D) {
-    if (collision2D.gameObject.layer == (int) Layer.Materials)
-      EventManager.TriggerEvent(new PlayerHitEvent());
+    playerController.Reset();;
+    ChangeState<IdleState>();
   }
 
   #endregion
 
-  #region Lean Selectable Behaviour
+  #region Mono Behaviour
 
-  protected override void OnSelect(LeanFinger finger) {
-    playerController.ResetRigidbody();
-    selected = !selected;
-    shaking.Rewind();
+  void OnPlayerSelectionEvent(PlayerSelectionEvent playerSelectionEvent) {
+    if (CurrentState.GetType() != typeof(ActiveState))
+      ChangeState<ActiveState>();
+    else
+      ChangeState<IdleState>();
   }
 
   #endregion
-
+	
 }

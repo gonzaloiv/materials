@@ -6,6 +6,14 @@ public class Config {
 }
 
 public enum Layer {
-  Materials = 7,
-  Player = 8
+  Materials = 8,
+  Player = 9,
+  Goal = 10
+}
+
+public enum Direction {
+  Up,
+  Right,
+  Down,
+  Left
 }

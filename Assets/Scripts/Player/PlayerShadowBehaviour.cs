@@ -6,9 +6,9 @@ public class PlayerShadowBehaviour : MonoBehaviour {
 
   #region Fields
 
-  private float SCALE_RATIO = 30;
+  private float SCALE_RATIO = 90;
 
-  [SerializeField] private GameObject shadow;
+  [SerializeField] private GameObject player;
   [SerializeField] private Color color;
 
   private Rigidbody2D rb;
@@ -19,15 +19,15 @@ public class PlayerShadowBehaviour : MonoBehaviour {
   #region Mono Behaviour
 
   void Awake() {
-    rb = GetComponent<Rigidbody2D>();
-    initialScale = shadow.transform.localScale;
+    rb = player.GetComponent<Rigidbody2D>();
+    initialScale = transform.localScale;
   }
 
   void Update() {
     if (rb.velocity != Vector2.zero)
-      shadow.transform.localScale = initialScale + initialScale * rb.velocity.magnitude / SCALE_RATIO;
+      transform.localScale = initialScale + initialScale * rb.velocity.magnitude / SCALE_RATIO;
     else 
-      shadow.transform.localScale = Vector2.Lerp(shadow.transform.localScale, initialScale, 0.1f);
+      transform.localScale = Vector2.Lerp(transform.localScale, initialScale, 0.1f);
   }
 
   #endregion

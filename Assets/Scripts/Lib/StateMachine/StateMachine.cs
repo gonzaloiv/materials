@@ -11,6 +11,14 @@ public class StateMachine : MonoBehaviour {
 
   #endregion
 
+  #region Mono Behaviour
+
+  void Update() {
+    CurrentState.Play();
+  }
+
+  #endregion
+
   #region Public Behaviour
 
   public virtual State GetState<T>() where T : State {
