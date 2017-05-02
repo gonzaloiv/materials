@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerHitEvent : UnityEvent {
   public PlayerHitEvent() {
-   Debug.Log("PlayerHitEvent");
+    Debug.Log("PlayerHitEvent");
   }
 }
 
@@ -16,8 +16,24 @@ public class PlayerSelectionEvent : UnityEvent {
 }
 
 public class GoalEvent : UnityEvent {
-  public GoalEvent() {
-    Debug.Log("GoalEvent");
+
+  public bool IsLevelEnd { get { return isLevelEnd; } }
+  private bool isLevelEnd;
+
+  public GoalEvent(bool isLevelEnd) {
+    this.isLevelEnd = isLevelEnd;
+    Debug.Log("GoalEvent. IsLevelEnd: " + isLevelEnd);
+  }
+
+}
+
+#endregion
+
+#region Scene Management Events
+
+public class LevelEndEvent : UnityEvent {
+  public LevelEndEvent() {
+    Debug.Log("LevelEndEvent");
   }
 }
 
