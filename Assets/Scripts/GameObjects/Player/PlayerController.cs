@@ -11,9 +11,7 @@ public class PlayerController : MonoBehaviour {
   [SerializeField] private SpriteRenderer shadow;
   [SerializeField] private Color shadowColor;
 
-  [SerializeField] private Vector2 direction;
-  [SerializeField] private float force;
-
+  private Player player;
   private Rigidbody2D rb;
   private SpriteRenderer rend;
   private Vector2 initialPosition;
@@ -23,6 +21,7 @@ public class PlayerController : MonoBehaviour {
   #region Mono Behaviour
 
   void Awake() {
+    player = GetComponent<Player>();
     rb = GetComponent<Rigidbody2D>();
     rend = GetComponent<SpriteRenderer>();
     initialPosition = transform.position;
@@ -32,7 +31,6 @@ public class PlayerController : MonoBehaviour {
     rend.color = bodyColor;
     shadow.color = shadowColor;
     ResetRigidbody();
-    Player.PlayerMovement = new PlayerMovement(direction, force);
   }
 
   void OnCollisionEnter2D(Collision2D collision2D) {
@@ -46,8 +44,7 @@ public class PlayerController : MonoBehaviour {
 
   public void Reset() {
     transform.position = initialPosition;
-    Player.PlayerMovement = new PlayerMovement(direction, force);
-    Player.IsSelected = false;
+    player.Reset();
     rb.isKinematic = false;
     transform.DOPause();
   }

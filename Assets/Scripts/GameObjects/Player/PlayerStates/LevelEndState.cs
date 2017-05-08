@@ -4,19 +4,18 @@ using UnityEngine;
 
 namespace PlayerStates {
 
-  public class ActiveState : BaseState {
+  public class LevelEndState : BaseState {
 
     #region State Behaviour
 
     public override void Enter() {
       base.Enter();
-      playerController.ResetRigidbody();
-      rb.AddForce(player.PlayerMovement.Direction * player.PlayerMovement.Force, ForceMode2D.Impulse);
+      GetComponent<PlayerSelectableBehaviour>().enabled = false;
     }
 
     public override void Exit() {
       base.Exit();
-      playerController.ResetRigidbody();
+      GetComponent<PlayerSelectableBehaviour>().enabled = true;
     }
 
     #endregion

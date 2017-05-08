@@ -17,12 +17,12 @@ public class PlayerSelectionEvent : UnityEvent {
 
 public class GoalEvent : UnityEvent {
 
-  public bool IsLevelEnd { get { return isLevelEnd; } }
-  private bool isLevelEnd;
+  public Goal Goal { get { return goal; } }
+  private Goal goal;
 
-  public GoalEvent(bool isLevelEnd) {
-    this.isLevelEnd = isLevelEnd;
-    Debug.Log("GoalEvent. IsLevelEnd: " + isLevelEnd);
+  public GoalEvent(Goal goal) {
+    this.goal = goal;
+    Debug.Log("GoalEvent. IsLevelEnd: " + goal.IsLevelEnd);
   }
 
 }

@@ -36,7 +36,7 @@ public class TransitionManager : MonoBehaviour {
   #region Event Behaviour
 
   void OnGoalEvent(GoalEvent goalEvent) {
-    if(goalEvent.IsLevelEnd)
+    if(goalEvent.Goal.IsLevelEnd)
       transitions[currentTransition].SetActive(true);
   }
 

@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-
 public class GoalController : MonoBehaviour {
 
   #region Fields
 
-  private const float TRIGGER_TIME = 1f; 
+  private const float TRIGGER_TIME = 2f;
 
-  [SerializeField] private Vector2 direction;
-  [SerializeField] private float force;
-  [SerializeField] private bool isLevelEnd = false;
-
+  private Goal goal;
   private Tweener shaking;
   private bool active;
   private float timestamp;
@@ -24,6 +20,7 @@ public class GoalController : MonoBehaviour {
 
   void Awake() {
     shaking = transform.DOShakeScale(1f, 0.2f, 5, 180, true).SetEase(Ease.InOutBounce).SetLoops(-1).Pause();
+    goal = GetComponent<Goal>();
   }
 
   void OnEnable() {
@@ -40,8 +37,7 @@ public class GoalController : MonoBehaviour {
     if (collider2D.gameObject.layer == (int) Layer.Player && timestamp + TRIGGER_TIME < Time.time) {
       active = false;
       shaking.Rewind();
-      Player.PlayerMovement = new PlayerMovement(direction, force);
-      EventManager.TriggerEvent(new GoalEvent(isLevelEnd));
+      EventManager.TriggerEvent(new GoalEvent(goal));
     }
   }
 

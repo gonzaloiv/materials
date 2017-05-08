@@ -8,14 +8,14 @@ public class PlayerSelectableBehaviour : LeanSelectableBehaviour {
 
   #region Fields
 
-  private PlayerController playerController;
+  private Player player;
 
   #endregion
 
   #region Mono Behaviour
 
   void Awake() {
-    playerController = GetComponent<PlayerController>();
+    player = GetComponent<Player>();
   }
 
   #endregion
@@ -23,7 +23,7 @@ public class PlayerSelectableBehaviour : LeanSelectableBehaviour {
   #region Lean Selectable Behaviour
 
   protected override void OnSelect(LeanFinger finger) {
-    Player.IsSelected = !Player.IsSelected;
+    player.IsSelected = !player.IsSelected;
     EventManager.TriggerEvent(new PlayerSelectionEvent());
   }
 

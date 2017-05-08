@@ -9,7 +9,7 @@ namespace PlayerStates {
 
     #region Fields
 
-    private static Vector2 goalPosition;
+    private static Goal currentGoal;
 
     #endregion
 
@@ -17,15 +17,23 @@ namespace PlayerStates {
 
     public override void Enter() {
       base.Enter();
-      transform.DOMove(goalPosition, 2);
+      transform.DOMove(currentGoal.Position, 2);
+      if(currentGoal.IsLevelEnd)
+        GetComponent<PlayerSelectableBehaviour>().enabled = false;
+    }
+
+    public override void Exit() {
+      base.Exit();
+      if(currentGoal.IsLevelEnd)
+        GetComponent<PlayerSelectableBehaviour>().enabled = true;
     }
 
     #endregion
 
     #region Public Behaviour
 
-    public static void SetGoalPosition(Vector2 position) {
-      goalPosition = position;
+    public static void SetCurrentGoal(Goal goal) {
+      currentGoal = goal;
     }
 
     #endregion

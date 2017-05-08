@@ -9,6 +9,7 @@ namespace PlayerStates {
     #region Fields
 
     protected PlayerController playerController;
+    protected Player player;
     protected Rigidbody2D rb;
 
     #endregion
@@ -17,6 +18,7 @@ namespace PlayerStates {
 
     void Awake() {
       playerController = GetComponent<PlayerController>();
+      player = GetComponent<Player>();
       rb = GetComponent<Rigidbody2D>();
     }
 
