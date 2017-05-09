@@ -8,7 +8,6 @@ public class PlayerBehaviour : StateMachine {
   #region Fields
 
   private PlayerController playerController;
-  private Player player;
 
   #endregion
 
@@ -16,7 +15,6 @@ public class PlayerBehaviour : StateMachine {
 
   void Awake() {
     playerController = GetComponent<PlayerController>();
-    player = GetComponent<Player>();
     ChangeState<IdleState>();
   }
 
@@ -31,7 +29,7 @@ public class PlayerBehaviour : StateMachine {
   void OnTriggerEnter2D(Collider2D collider2D) {
     if (collider2D.gameObject.layer == (int) Layer.Goal) {
       Goal currentGoal = collider2D.gameObject.GetComponent<Goal>();
-      if (CurrentState.GetType() != typeof(GoalState) && CurrentState.GetType() != typeof(LevelEndState)) {
+      if (CurrentState.GetType() != typeof(GoalState)) {
         GoalState.SetCurrentGoal(currentGoal);
         ChangeState<GoalState>();
       }
@@ -52,6 +50,7 @@ public class PlayerBehaviour : StateMachine {
       ChangeState<ActiveState>();
     else
       ChangeState<IdleState>();
+
   }
 
   #endregion

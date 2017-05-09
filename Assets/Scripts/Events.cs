@@ -27,6 +27,12 @@ public class GoalEvent : UnityEvent {
 
 }
 
+public class MaterialSelectionEvent : UnityEvent {
+  public MaterialSelectionEvent() {
+    Debug.Log("MaterialSelectionEvent");
+  }
+}
+
 #endregion
 
 #region Scene Management Events

@@ -15,7 +15,7 @@ public abstract class State : MonoBehaviour {
   #region Public Behaviour
 
   public virtual void Enter() {
-    Debug.Log("ENTER: " + this.GetType());
+    Debug.Log(gameObject.name + " enters " + this.GetType());
     AddListeners();
   }
 

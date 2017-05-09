@@ -7,6 +7,7 @@ public class SFXManager : MonoBehaviour {
   #region Fields
 
   [SerializeField] private AudioClip gameStartedSound;
+  [SerializeField] private AudioClip levelEndSound;
   [SerializeField] private AudioClip[] playerHitSounds;
   [SerializeField] private AudioClip[] playerSelectionSounds;
 
@@ -25,12 +26,14 @@ public class SFXManager : MonoBehaviour {
     EventManager.StartListening<PlayerHitEvent>(OnPlayerHitEvent);
     EventManager.StartListening<PlayerSelectionEvent>(OnPlayerSelectionEvent);
     EventManager.StartListening<GoalEvent>(OnGoalEvent);
+    EventManager.StartListening<MaterialSelectionEvent>(OnMaterialSelectionEvent);
   }
 
   void OnDisable() {
     EventManager.StopListening<PlayerHitEvent>(OnPlayerHitEvent);
     EventManager.StopListening<PlayerSelectionEvent>(OnPlayerSelectionEvent);
     EventManager.StopListening<GoalEvent>(OnGoalEvent);
+    EventManager.StopListening<MaterialSelectionEvent>(OnMaterialSelectionEvent);
   }
 
   #endregion
@@ -46,6 +49,11 @@ public class SFXManager : MonoBehaviour {
   }
 
   void OnGoalEvent(GoalEvent goalEvent) {
+    AudioClip clip = goalEvent.Goal.IsLevelEnd ? levelEndSound : playerHitSounds[Random.Range(0, playerHitSounds.Length)];
+    audioSource.PlayOneShot(clip);
+  }
+
+  void OnMaterialSelectionEvent(MaterialSelectionEvent materialSelectionEvent) {
     audioSource.PlayOneShot(playerSelectionSounds[Random.Range(0, playerSelectionSounds.Length)]);
   }
 

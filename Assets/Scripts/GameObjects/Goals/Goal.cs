@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour {
   private PlayerMovement playerMovement;
 
   public bool IsLevelEnd { get { return isLevelEnd; } }
-  [SerializeField] private bool isLevelEnd = false;
+  [SerializeField] private bool isLevelEnd;
 
   public Vector2 Position { get { return position; } }
   private Vector2 position;
