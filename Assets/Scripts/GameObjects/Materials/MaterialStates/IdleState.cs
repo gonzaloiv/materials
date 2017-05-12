@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace MaterialStates {
 
-  public class IdleState : State {
+  public class IdleState : BaseState {
 
     #region Fields
 
@@ -13,18 +13,13 @@ namespace MaterialStates {
 
     #endregion
 
-    #region Mono Behaviour
-
-    void Awake() {
-      shaking = transform.DOShakeScale(1f, 0.2f, 5, 180, true).SetEase(Ease.InOutBounce).SetLoops(-1).Pause();
-    }
-
-    #endregion
-
     #region State Behaviour
 
     public override void Enter() {
       base.Enter();
+      if(shadowBehaviour != null)
+        shadowBehaviour.enabled = false;
+      shaking = transform.DOShakeScale(1f, 0.2f, 5, 180, true).SetEase(Ease.InOutBounce).SetLoops(-1).Pause();
       if(!shaking.IsPlaying())
         shaking.Play();
     }

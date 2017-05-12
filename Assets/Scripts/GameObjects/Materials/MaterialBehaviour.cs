@@ -16,7 +16,7 @@ public class MaterialBehaviour : StateMachine {
   #region Public Behaviour
 
   public void Close() {
-    ChangeState<ActiveState>();
+    ChangeState<ClosedState>();
   }
 
   public void Activate() {

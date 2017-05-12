@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerHitEvent : UnityEvent {
   public PlayerHitEvent() {
-    Debug.Log("PlayerHitEvent");
+//    Debug.Log("PlayerHitEvent");
   }
 }
 

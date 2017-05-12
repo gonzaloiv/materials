@@ -8,7 +8,7 @@ public class GoalBehaviour : StateMachine {
 
   #region Fields
 
-  private const float TRIGGER_TIME = 2f;
+  private const float TRIGGER_TIME = 0.5f;
   private Goal goal;
 
   private bool active;
@@ -29,6 +29,7 @@ public class GoalBehaviour : StateMachine {
 
   void OnTriggerEnter2D(Collider2D collider2D) {
     if (collider2D.gameObject.layer == (int) Layer.Player && timestamp + TRIGGER_TIME < Time.time) {
+      timestamp = Time.time;
       ChangeState<InactiveState>();
       EventManager.TriggerEvent(new GoalEvent(goal));
     }

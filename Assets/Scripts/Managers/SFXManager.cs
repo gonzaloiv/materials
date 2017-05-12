@@ -41,7 +41,7 @@ public class SFXManager : MonoBehaviour {
   #region Event Behaviour
 
   void OnPlayerHitEvent(PlayerHitEvent playerHitEvent) {
-    audioSource.PlayOneShot(playerHitSounds[Random.Range(0, playerHitSounds.Length)]);
+//    audioSource.PlayOneShot(playerHitSounds[Random.Range(0, playerHitSounds.Length)]);
   }
 
   void OnPlayerSelectionEvent(PlayerSelectionEvent playerSelectionEvent) {

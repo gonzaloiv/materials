@@ -5,22 +5,11 @@ using DG.Tweening;
 
 namespace MaterialStates {
 
-  public class ActiveState : State {
-
-    #region Fields
-
-    private Rigidbody2D rb;
-    private Tweener closing;
-
-    #endregion
+  public class ActiveState : BaseState {
 
     #region Mono Behaviour
 
-    void Awake() {
-      rb = GetComponent<Rigidbody2D>();
-      closing = transform.DOScale(0.2f, 0.5f).Pause();
-      closing.OnComplete(Disable);
-    }
+    private Tweener shaking;
 
     #endregion
 
@@ -28,21 +17,13 @@ namespace MaterialStates {
 
     public override void Enter() {
       base.Enter();
-      closing.Play();
-      rb.simulated = false;
+      DOTween.PauseAll();
+      shadowBehaviour.enabled = true;
     }
 
     public override void Exit() {
       base.Exit();
-      rb.simulated = true;
-    }
-
-    #endregion
-
-    #region Private Behaviour
-
-    private void Disable() {
-      gameObject.SetActive(false);
+      shadowBehaviour.enabled = false;
     }
 
     #endregion

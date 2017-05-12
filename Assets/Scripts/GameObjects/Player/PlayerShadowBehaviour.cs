@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShadowBehaviour : MonoBehaviour {
+public class PlayerShadowBehaviour : MonoBehaviour {
 
   #region Fields
 
-  private float SCALE_RATIO = 90;
+  private float SCALE_RATIO = 70;
 
   [SerializeField] private GameObject player;
   [SerializeField] private Color color;

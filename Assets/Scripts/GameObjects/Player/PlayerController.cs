@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour {
     rb.velocity = Vector2.zero;
   }
 
+  public void AddForce(Vector2 force) {
+    rb.AddForce(force);
+  }
+
   #endregion
 
 }

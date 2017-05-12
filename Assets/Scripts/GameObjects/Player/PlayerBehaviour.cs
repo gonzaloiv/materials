@@ -39,6 +39,7 @@ public class PlayerBehaviour : StateMachine {
   void OnBecameInvisible() {
     playerController.Reset();
     ChangeState<IdleState>();
+//    EventManager.TriggerEvent(new LevelEndEvent()); // TODO: a end-of-level state for the levels ending
   }
 
   #endregion
@@ -50,7 +51,6 @@ public class PlayerBehaviour : StateMachine {
       ChangeState<ActiveState>();
     else
       ChangeState<IdleState>();
-
   }
 
   #endregion

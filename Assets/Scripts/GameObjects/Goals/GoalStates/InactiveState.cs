@@ -9,7 +9,7 @@ namespace GoalStates {
 
     #region Fields
 
-    private static Color INACTIVE_COLOR = new Color(117, 117, 117, 1);
+    private static Color INACTIVE_COLOR = new Color(70, 70, 70, 1);
 
     private static Color initialColor;
     private SpriteRenderer spriteRenderer;
