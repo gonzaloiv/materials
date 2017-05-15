@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CameraController : MonoBehaviour {
+
+public class CameraController : StateMachine {
 
   #region Fields
 
-  private const float MAX_SPEED = 1.5f;
-
+  [SerializeField] private float TRAVELLING_SPEED = 1.5f;
+  [SerializeField] private float FOCUS_SPEED = 0.01f;
   [SerializeField] GameObject player;
+
   private Camera cam;
   private Vector3 initialPosition;
-  private Vector3 initialSize;
+  private float initialSize;
+  private float nextSize;
 
   #endregion
 
@@ -22,18 +25,27 @@ public class CameraController : MonoBehaviour {
     cam = GetComponent<Camera>();
     initialPosition = transform.position;
     initialSize = cam.orthographicSize;
+    nextSize = initialSize;
   }
 
   void Update() {
-    transform.position = Vector3.Lerp(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, initialPosition.z), MAX_SPEED * Time.deltaTime);
+    transform.position = Vector3.Lerp(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, initialPosition.z), TRAVELLING_SPEED * Time.deltaTime);
+    if(nextSize != cam.orthographicSize)
+      cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, nextSize, FOCUS_SPEED);
   }
 
   #endregion
 
   #region Public Behaviour
 
-  public void UpdateSize(int size) {
-    cam.orthographic = size;
+  public void UpdateSize(float scale, float focusSpeed) {
+    this.nextSize = initialSize * scale;
+    this.FOCUS_SPEED = focusSpeed;
+  }
+
+  public void ResetSize(float focusSpeed) {
+    this.nextSize = initialSize;
+    this.FOCUS_SPEED = focusSpeed;
   }
 
   #endregion

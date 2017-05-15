@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     transform.position = initialPosition;
     player.Reset();
     rb.isKinematic = false;
+    rb.velocity = Vector2.zero;
     transform.DOPause();
   }
 

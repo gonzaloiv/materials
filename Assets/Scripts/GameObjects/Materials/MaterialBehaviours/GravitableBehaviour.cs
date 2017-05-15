@@ -8,8 +8,8 @@ public class GravitableBehaviour : LeanSelectableBehaviour {
 
   #region Fields
 
-  [SerializeField] private float PULL_FORCE;
-  [SerializeField] private float PUSH_FORCE_RATIO;
+  [SerializeField] private float PULL_FORCE = 500;
+  [SerializeField] private float PUSH_FORCE_RATIO = 10;
   [SerializeField] private GameObject player;
 
   private MaterialBehaviour materialBehaviour;

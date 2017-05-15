@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour {
 
   #region Mono Behaviour
 
+  void Start() {
+    EventManager.TriggerEvent(new LevelStartEvent());
+  }
+
   void OnEnable() {
     EventManager.StartListening<LevelEndEvent>(OnLevelEndEvent);
   }

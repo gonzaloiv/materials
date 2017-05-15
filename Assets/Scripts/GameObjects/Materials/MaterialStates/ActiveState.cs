@@ -18,12 +18,14 @@ namespace MaterialStates {
     public override void Enter() {
       base.Enter();
       DOTween.PauseAll();
-      shadowBehaviour.enabled = true;
+      if(shadowBehaviour != null)
+        shadowBehaviour.enabled = true;
     }
 
     public override void Exit() {
       base.Exit();
-      shadowBehaviour.enabled = false;
+      if(shadowBehaviour != null)
+        shadowBehaviour.enabled = false;
     }
 
     #endregion

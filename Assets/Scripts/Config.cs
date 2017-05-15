@@ -17,3 +17,8 @@ public enum Direction {
   Down,
   Left
 }
+
+public enum CameraMovementType {
+  Reset,
+  Zoom
+}

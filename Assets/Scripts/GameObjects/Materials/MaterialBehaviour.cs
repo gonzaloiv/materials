@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MaterialStates;
+using Lean.Touch;
 
 public class MaterialBehaviour : StateMachine {
 
@@ -9,6 +10,24 @@ public class MaterialBehaviour : StateMachine {
 
   void Awake() {
     ChangeState<IdleState>();
+  }
+
+  void OnEnable() {
+    EventManager.StartListening<LevelRestartEvent>(OnLevelRestartEvent);
+  }
+
+  void OnDisable() {
+    EventManager.StopListening<LevelRestartEvent>(OnLevelRestartEvent);
+  }
+
+  #endregion
+
+  #region Event Behaviour
+
+  void OnLevelRestartEvent(LevelRestartEvent levelRestartEvent) {
+    LeanSelectable selectable = GetComponent<LeanSelectable>();
+    if(selectable != null)
+      selectable.Deselect();
   }
 
   #endregion

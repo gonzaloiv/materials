@@ -37,6 +37,18 @@ public class MaterialSelectionEvent : UnityEvent {
 
 #region Scene Management Events
 
+public class LevelStartEvent : UnityEvent {
+  public LevelStartEvent() {
+    Debug.Log("LevelStartEvent");
+  }
+}
+
+public class LevelRestartEvent : UnityEvent {
+  public LevelRestartEvent() {
+    Debug.Log("LevelRestartEvent");
+  }
+}
+
 public class LevelEndEvent : UnityEvent {
   public LevelEndEvent() {
     Debug.Log("LevelEndEvent");

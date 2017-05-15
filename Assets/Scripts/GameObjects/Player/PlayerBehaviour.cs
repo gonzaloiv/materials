@@ -9,6 +9,7 @@ public class PlayerBehaviour : StateMachine {
 
   private PlayerController playerController;
 
+
   #endregion
 
   #region Mono Behaviour
@@ -39,7 +40,7 @@ public class PlayerBehaviour : StateMachine {
   void OnBecameInvisible() {
     playerController.Reset();
     ChangeState<IdleState>();
-//    EventManager.TriggerEvent(new LevelEndEvent()); // TODO: a end-of-level state for the levels ending
+    EventManager.TriggerEvent(new LevelRestartEvent()); // TODO: a end-of-level state for the level ending
   }
 
   #endregion
